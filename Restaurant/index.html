@@ -41,16 +41,15 @@
         <div id="collapsable-nav" class="collapse navbar-collapse">
         <ul id="nav-list" class="nav navbar-nav navbar-right">
 
-          <li class="active">
+          <li id='homeMenuButton' class="active">
             <a href="index.html">
               <span class="glyphicon glyphicon-home"></span><br class="hidden-xs"> Home
             </a>
           </li>
           
-          <li>
-            <a href="menu.html">
-              <span class="glyphicon glyphicon-menu-hamburger"></span><br class="hidden-xs"> Menu
-            </a>
+          <li id="navMenuButton">
+            <a href="#" onclick="$dc.loadMenuCategories();">
+              <span class="glyphicon glyphicon-cutlery"></span><br class="hidden-xs"> Menu</a>
           </li>
 
           <li>
@@ -89,38 +88,7 @@
   </div>  
 
   <!-- Main content is placed below -->
-  <div id="main-content" class="container">
-    <div class="jumbotron">
-      <img src="images/Zapper.svg" alt="Picture of Restaurant" class="img-responsive visible-xs">
-    </div>
-
-    <!-- Home tiles starts here -->
-    <div class="row" id="home-tiles">
-      <div class="col-md-4 col-sm-6 col-xs-12">
-        <a href="menu.html">
-          <div id="menu-tile">
-            <span>Menu</span>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-4 col-sm-6 col-xs-12">
-        <a href="single-category.html">
-          <div id="specials-tile">
-            <span>Specials</span>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-4 col-sm-12 col-xs-12">
-        <a href="https://goo.gl/maps/toHuxhTziFU2" target="_blank">
-          <div id="map-tile">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12338.70622886598!2d-76.7116515!3d39.3635606!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xab20a0e99daa17ea!2sDavid+Chu&#39;s+China+Bistro!5e0!3m2!1sen!2sin!4v1554103217237!5m2!1sen!2sin" width="100%" height="250px" frameborder="0" style="border:0" allowfullscreen></iframe>
-            <span>Map</span>
-          </div>
-        </a>
-      </div>
-     </div><!--End of #home-tiles -->
+  <div id="main-content" class="container">   
   </div><!-- End of #main-content -->
  
   <footer class="panel-footer">
@@ -158,6 +126,7 @@
   <!-- jQuery (Bootstrap JS plugins depend on it) -->
   <script src="js/jquery-2.1.4.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  <script src="js/ajax-utils.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>
