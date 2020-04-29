@@ -1,11 +1,11 @@
-import {baseUrl} from '../view/base.js';
+import {baseHtml} from '../view/base.js';
 
 export default class HomeModel{
     constructor(){
     }
 
      getHomePage(){
-        const homeHtml = fetch(baseUrl.home,{
+        fetch(baseHtml.homeHtml,{
             method : "GET",
             credentials : 'same-origin',
             headers : {

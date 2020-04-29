@@ -1,4 +1,4 @@
-import {baseUrl,mainContainer} from './base.js';
+import {baseHtml,mainContainer} from './base.js';
 
 export const renderHomePage = (html)=>{
     mainContainer.innerHTML = html;
