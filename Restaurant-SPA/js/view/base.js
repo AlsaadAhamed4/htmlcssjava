@@ -27,3 +27,5 @@ export const sleep = (ms) =>{
 export const clearMainContainer = () =>{
     mainContainer.innerHTML = '';
 }
+
+export const clearFixHtml = "<div class='clearfix visible-lg-block visible-md-block'></div>";

@@ -17,7 +17,8 @@ export default class MenuItemSingle{
             return res.json();
         })
         .then(data=>{
-            this.menuItemSingleResults = data;
+            this.menuItemSingleMenuItems = data.menu_items;
+            this.menuItemSingleCategory = data.category;
         })
         .catch(error=>{
             console.error('Error:', error);

@@ -24,7 +24,7 @@ const HomeController = async () =>{
   showLoader(mainContainer);
 
   //sleep for 1sec because to fetch homepage it takes time to respond
-  await sleep(1000);
+  await sleep(1500);
 
   //show the html in UI
   HomeView.renderHomePage(homeObj.results);
@@ -43,32 +43,57 @@ const isMenu = (e)=>{
     loadMenuItems(e.target.closest('.menuItemSingle').dataset.shortname);
   }
 }
+//here i am using array to loop, in each loop I assign a event whith repect to the condition in menu function
 [mainContainer,NavList].forEach(ele => ele.addEventListener('click', isMenu));
+
+
+
 
 //menu-Category controller
 
-const MenuCategoriesController = async () =>{
+const MenuCategoriesController = () =>{
 
+  //clear the container 
   clearMainContainer();
+  //show Loader
   showLoader(mainContainer);
+  //create object from class for menu
   const menuCategoriesObj = new MenuCategoriesModel();
-  menuCategoriesObj.getMenuCategories();
-  await sleep(1000);
-  MenuCategoriesView.renderMenuCategoryResults(menuCategoriesObj.categories);
+  //sometimes fecth fails and return undefined to handle that
+  //TODO axios should be used for better error handling
+  checkFectchForMenu(menuCategoriesObj);
+}
 
+const checkFectchForMenu =  async (menuCategoriesObj)=>{
+  //call method of the class to fecth data
+  menuCategoriesObj.getMenuCategories();
+  //sleep for 1.5 sec
+  await sleep(1500);
+  //handling if fecth returns undefined
+  if(menuCategoriesObj.categories === undefined){
+      alert(`There was an error while Fetching Menu, We will try again!`);
+      menuCategoriesObj.getMenuCategories();
+      await sleep(1500);
+  }
+  //display in UI
+  MenuCategoriesView.renderMenuCategoryResults(menuCategoriesObj.categories);
 }
 
 
 //menu-Items single page  as we have passed the onclick on html with shortName as per API
 
 const loadMenuItems = async (shortName)=>{
+  //clear container 
   clearMainContainer();
+  //show loader
   showLoader(mainContainer);
+  //create object from class for menu-items-single
   const menuItemSingleObj = new MenuItemSingleModel(shortName);
+  //call method of the class to fecth data
   menuItemSingleObj.getMenuItemSingle();
-  await sleep(1000);
-  console.log(menuItemSingleObj.menuItemSingleResults);
-
-
+  //sleep for 1.5 sec so that data is retrived from the server
+  await sleep(1500);
+  //display in UI
+  MenuItemSingleView.renderResults(menuItemSingleObj.menuItemSingleCategory,menuItemSingleObj.menuItemSingleMenuItems);
 }
 
