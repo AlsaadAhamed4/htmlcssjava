@@ -1,4 +1,4 @@
-import {baseHtml,showLoader,mainContainer,sleep,homeTilesDiv,clearMainContainer,NavList} from './view/base.js';
+import {baseHtml,showLoader,mainContainer,sleep,homeTilesDiv,clearMainContainer,NavList, clearFixHtml} from './view/base.js';
 
 import HomeModel from './model/HomeModel.js';
 import * as HomeView  from './view/HomeView.js'; 
@@ -9,6 +9,7 @@ import * as MenuCategoriesView from './view/MenuCategoriesView.js';
 import MenuItemSingleModel from './model/MenuItemSingleModel.js';
 import * as MenuItemSingleView from './view/MenuItemsSingleView.js';
 
+const state = {};
 
 //main Controller
 
@@ -27,8 +28,7 @@ const HomeController = async () =>{
   await sleep(1500);
 
   //show the html in UI
-  HomeView.renderHomePage(homeObj.results);
-
+  HomeView.renderHomePage(homeObj.results)
 }
 
 //Event to loader page for home page
@@ -39,9 +39,13 @@ document.addEventListener('DOMContentLoaded',function(){
 //event deligation for menu
 const isMenu = (e)=>{
   (e.target.matches('#menu-tile, #menu-tile *')||e.target.matches('#navMenuButton, #navMenuButton *')) ? MenuCategoriesController() : '';
+  (e.target.matches('#specials-tile, #specials-tile *')) ? loadMenuItems('SP') : ''; //special tiles uses same API as menuSingleItem
   if(e.currentTarget.id === 'main-content' && e.target.closest('.menuItemSingle')){
     loadMenuItems(e.target.closest('.menuItemSingle').dataset.shortname);
   }
+  // else if(e.currentTarget.id === 'main-content' && e.target.closest('.')){
+
+  //}
 }
 //here i am using array to loop, in each loop I assign a event whith repect to the condition in menu function
 [mainContainer,NavList].forEach(ele => ele.addEventListener('click', isMenu));
@@ -96,4 +100,3 @@ const loadMenuItems = async (shortName)=>{
   //display in UI
   MenuItemSingleView.renderResults(menuItemSingleObj.menuItemSingleCategory,menuItemSingleObj.menuItemSingleMenuItems);
 }
-
