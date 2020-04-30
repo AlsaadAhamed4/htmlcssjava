@@ -1,5 +1,6 @@
-import {baseHtml,mainContainer} from './base.js';
+import {baseHtml,mainContainer, clearMainContainer} from './base.js';
 
 export const renderHomePage = (html)=>{
-    mainContainer.innerHTML = html;
+    clearMainContainer();
+    mainContainer.insertAdjacentHTML('afterbegin',html);
 }
